@@ -46,6 +46,8 @@ class Process extends Command {
 		}
 
 		Cache::forever( 'isWorkerStarted', true );
+		set_time_limit( 0 );
+		$skipTables   = explode( ',', env( 'SKIP_TABLES', '' ) );
 
 		if ( Cache::has( 'tables' ) ) {
 			$tables = Cache::get( 'tables' );
@@ -77,10 +79,8 @@ class Process extends Command {
 			Cache::put( 'rows', $rows, 15 );
 		}
 
-		set_time_limit( 0 );
 		$runStartedAt = time();
 		$wasWorking   = false;
-		$skipTables   = explode( ',', env( 'SKIP_TABLES', '' ) );
 
 		while ( $runStartedAt + 60 * 10 >= time() ) {
 			foreach ( $tables['pgsql'] as $table ) {
