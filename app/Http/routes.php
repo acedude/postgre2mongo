@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get( '/', 'HomeController@index' );
+
+Route::get( '/api/status', 'StatusApiController@index' );
+Route::get( '/api/control', 'ControlApiController@toggle' );
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,6 @@ Route::get('/', function () {
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
-});
+Route::group( [ 'middleware' => [ 'web' ] ], function () {
+	//
+} );

@@ -1,0 +1,41 @@
+/*
+* Layout
+************************************************************************************************************************
+*/
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 900px;
+    }
+}
+
+/*
+*
+************************************************************************************************************************
+*/
+
+#main-summary {
+    font-size: 20px;
+}
+
+#connections .glyphicon {
+    background: none;
+    margin-left: 15px;
+}
+
+#individual-progress .progress {
+    height: 18px;
+    margin-bottom: 2px;
+}
+
+.progress {
+    position: relative;
+}
+
+.progress-bar-label {
+    color: #fff;
+    mix-blend-mode: difference;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
