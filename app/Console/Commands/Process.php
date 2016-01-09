@@ -47,7 +47,7 @@ class Process extends Command {
 
 		Cache::forever( 'isWorkerStarted', true );
 		set_time_limit( 0 );
-		$skipTables   = explode( ',', env( 'SKIP_TABLES', '' ) );
+		$skipTables = explode( ',', env( 'SKIP_TABLES', '' ) );
 
 		if ( Cache::has( 'tables' ) ) {
 			$tables = Cache::get( 'tables' );
@@ -67,6 +67,10 @@ class Process extends Command {
 		} else {
 			$rows = [ 'pgsql' => [ ], 'mongodb' => [ ] ];
 			foreach ( $tables['pgsql'] as $table ) {
+				if ( in_array( $table, $skipTables ) ) {
+					$rows['pgsql'][ $table ] = 0;
+				}
+
 				$rows['pgsql'][ $table ] = DB::connection( 'pgsql' )->table( $table )->count();
 			}
 
