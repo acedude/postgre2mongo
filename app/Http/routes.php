@@ -13,7 +13,7 @@
 
 Route::get( '/', 'HomeController@index' );
 Route::get( '/flush', function () {
-	return Cache::clear();
+	return Cache::flush();
 } );
 
 Route::get( '/api/status', 'StatusApiController@index' );
