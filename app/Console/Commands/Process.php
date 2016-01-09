@@ -69,6 +69,7 @@ class Process extends Command {
 			foreach ( $tables['pgsql'] as $table ) {
 				if ( in_array( $table, $skipTables ) ) {
 					$rows['pgsql'][ $table ] = 0;
+					continue;
 				}
 
 				$rows['pgsql'][ $table ] = DB::connection( 'pgsql' )->table( $table )->count();
