@@ -12,6 +12,9 @@
 */
 
 Route::get( '/', 'HomeController@index' );
+Route::get( '/flush', function () {
+	return Cache::clear();
+} );
 
 Route::get( '/api/status', 'StatusApiController@index' );
 Route::get( '/api/control', 'ControlApiController@toggle' );
