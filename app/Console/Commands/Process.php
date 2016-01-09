@@ -45,6 +45,7 @@ class Process extends Command {
 			return;
 		}
 
+		// Test
 		Cache::forever( 'isWorkerStarted', true );
 		set_time_limit( 0 );
 		$skipTables   = explode( ',', env( 'SKIP_TABLES', '' ) );
