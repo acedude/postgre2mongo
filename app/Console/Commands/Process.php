@@ -108,7 +108,11 @@ class Process extends Command {
 
 					$data = DB::connection( 'pgsql' )->table( $table )->skip( $rows['mongodb'][ $table ] )->take( $batchSize )->get();
 
-					DB::connection( 'mongodb' )->table( $table )->insert( json_decode( json_encode( $data ), true ) );
+					if ($table == 'subnautica_feedback_tickets') {
+
+					} else {
+						\SubnauticaFeedbackTicket::connection( 'mongodb' )->insert( json_decode( json_encode( $data ), true ) );
+					}
 
 					$rows['mongodb'][ $table ] += $batchSize;
 					Cache::put( 'rows', $rows, 15 );
