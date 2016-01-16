@@ -123,6 +123,11 @@ class Process extends Command {
 					DB::connection( 'mongodb' )->table( $table )->insert( $insert );
 
 					$rows['mongodb'][ $table ] += $batchSize;
+
+					if ( $rows['mongodb'][ $table ] > $rows['pgsql'][ $table ] ) {
+						$rows['mongodb'][ $table ] = $rows['pgsql'][ $table ];
+					}
+
 					Cache::put( 'rows', $rows, 15 );
 					Cache::increment( 'rowsProcessedThisRun', $batchSize );
 
