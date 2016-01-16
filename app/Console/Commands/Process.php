@@ -2,11 +2,13 @@
 
 namespace App\Console\Commands;
 
+use App\SubnauticaFeedbackTicket;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use MongoDate;
 
 class Process extends Command {
 	/**
@@ -108,7 +110,17 @@ class Process extends Command {
 
 					$data = DB::connection( 'pgsql' )->table( $table )->skip( $rows['mongodb'][ $table ] )->take( $batchSize )->get();
 
-					DB::connection( 'mongodb' )->table( $table )->insert( json_decode( json_encode( $data ), true ) );
+					$insert = json_decode( json_encode( $data ), true );
+					// Cast date fields to MongoDate objects
+					foreach ( $insert as $key => $item ) {
+						foreach ( $item as $rowName => $value ) {
+							if ( $rowName == 'created_at' || $rowName == 'updated_at' ) {
+								$insert[ $key ][ $rowName ] = new MongoDate( strtotime( $value ) );
+							}
+						}
+					}
+
+					DB::connection( 'mongodb' )->table( $table )->insert( $insert );
 
 					$rows['mongodb'][ $table ] += $batchSize;
 					Cache::put( 'rows', $rows, 15 );

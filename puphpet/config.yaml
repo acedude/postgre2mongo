@@ -10,10 +10,10 @@ vagrantfile:
         network:
             private_network: 192.168.56.110
             forwarded_port:
-                vflnp_iu40hc5x9ib2:
+                vflnp_0tn5cc23ls6p:
                     host: '7859'
                     guest: '22'
-                vflnp_49u76o74dutr:
+                vflnp_h1tbfbroc4q0:
                     host: '28017'
                     guest: '27017'
         post_up_message: ''
@@ -34,7 +34,7 @@ vagrantfile:
                     - '--verbose'
                     - '--hiera_config /vagrant/puphpet/puppet/hiera.yaml'
         synced_folder:
-            vflsf_dqlf52uaneyk:
+            vflsf_8c9b6xu1yj3c:
                 source: 'D:\\localhost\\postgre2mongo.dev'
                 target: /var/www
                 sync_type: default
@@ -101,7 +101,7 @@ nginx:
         names_hash_bucket_size: 128
     upstreams: {  }
     vhosts:
-        nxv_53z2zbta1wqd:
+        nxv_dpbgy9z1aioh:
             server_name: postgre2mongo.dev
             server_aliases:
                 - www.postgre2mongo.dev
@@ -121,7 +121,7 @@ nginx:
             rewrite_to_https: '1'
             spdy: '1'
             locations:
-                nxvl_s2062sg7f5tc:
+                nxvl_514ry5kli4wb:
                     location: /
                     autoindex: 'on'
                     internal: 'false'
@@ -134,7 +134,7 @@ nginx:
                     fastcgi_split_path: ''
                     proxy: ''
                     proxy_redirect: ''
-                nxvl_z0ziqogcq785:
+                nxvl_behqz92rnbox:
                     location: '~ \.php$'
                     autoindex: 'off'
                     internal: 'false'
@@ -154,6 +154,7 @@ nginx:
 apache:
     install: '0'
     settings:
+        version: 2.4
         user: www-data
         group: www-data
         default_vhost: true
@@ -164,7 +165,7 @@ apache:
         - proxy_fcgi
         - rewrite
     vhosts:
-        av_g93yurn704l6:
+        av_i9906jupedr0:
             servername: awesome.dev
             serveraliases:
                 - www.awesome.dev
@@ -181,7 +182,7 @@ apache:
             ssl_protocol: ''
             ssl_cipher: ''
             directories:
-                avd_nb8ivwapy3sz:
+                avd_do1m79q591wv:
                     path: /var/www/awesome
                     options:
                         - Indexes
@@ -193,7 +194,7 @@ apache:
                         - 'all granted'
                     custom_fragment: ''
                     files_match:
-                        avdfm_ubvpcqyn3xk2:
+                        avdfm_o3z7zsd8ulcv:
                             path: \.php$
                             sethandler: 'proxy:fcgi://127.0.0.1:9000'
                             custom_fragment: ''
@@ -219,7 +220,7 @@ php:
     fpm_ini:
         error_log: /var/log/php-fpm.log
     fpm_pools:
-        phpfp_g3m6b0omn59d:
+        phpfp_48ebtnh4ly50:
             ini:
                 prefix: www
                 listen: '127.0.0.1:9000'
@@ -294,15 +295,15 @@ mariadb:
         override_options: {  }
     adminer: 0
     users:
-        mariadbnu_lfxgp1s2vhes:
+        mariadbnu_nvvumcc7lizk:
             name: dbuser
             password: '123'
     databases:
-        mariadbnd_c4mz79a0230d:
+        mariadbnd_74s7w4ebt905:
             name: dbname
             sql: ''
     grants:
-        mariadbng_ei8ui0cs88jl:
+        mariadbng_y0hzuska9n0m:
             user: dbuser
             table: '*.*'
             privileges:
@@ -315,15 +316,15 @@ mysql:
         override_options: {  }
     adminer: 0
     users:
-        mysqlnu_3vr4ek3ya314:
+        mysqlnu_gsyhfopto4ka:
             name: postgre2mongo
             password: postgre2mongo
     databases:
-        mysqlnd_porchypgx3jf:
+        mysqlnd_3ayyf17uzhvh:
             name: postgre2mongo
             sql: ''
     grants:
-        mysqlng_ggyqe4dtpyxh:
+        mysqlng_4c17netz8db4:
             user: postgre2mongo
             table: '*.*'
             privileges:
@@ -337,16 +338,16 @@ postgresql:
         server:
             postgres_password: root
     databases:
-        postsqlnd_8igu00kg1evj:
+        postsqlnd_1npb67d37dlf:
             dbname: postgre2mongo
             owner: postgre2mongo
     users:
-        postsqlnu_xtu43aakn4ak:
+        postsqlnu_viz4zlwdqbca:
             username: postgre2mongo
             password: postgre2mongo
             superuser: '1'
     grants:
-        postsqlng_ki5nzwl9cget:
+        postsqlng_3kek0ka8fli2:
             role: postgre2mongo
             db: postgre2mongo
             privilege:
@@ -359,12 +360,12 @@ mongodb:
         bind_ip: 127.0.0.1
         port: '27017'
     globals:
-        version: 2.6.0
+        version: 2.6.11
     databases: {  }
 redis:
     install: '1'
     settings:
-        conf_port: '6379'
+        port: '6379'
 sqlite:
     install: '0'
     adminer: 0

@@ -7,9 +7,10 @@ class puphpet_ruby (
   Class['::rvm']
   -> Puphpet::Ruby::Dotfile <| |>
   -> Puphpet::Ruby::Install <| |>
-  -> Exec['rvm rvmrc warning ignore all.rvmrcs']
 
-  class { '::rvm': }
+  class { '::rvm':
+    key_server => 'hkp://pgp.mit.edu/',
+  }
 
   if ! defined(Group['rvm']) {
     group { 'rvm':
@@ -21,6 +22,7 @@ class puphpet_ruby (
     command => 'rvm rvmrc warning ignore all.rvmrcs && touch /.puphpet-stuff/rvmrc',
     creates => '/.puphpet-stuff/rvmrc',
     path    => '/bin:/usr/bin:/usr/local/bin:/usr/local/rvm/bin',
+    require => Exec['system-rvm'],
   }
 
   User <| title == $::ssh_username |> {
